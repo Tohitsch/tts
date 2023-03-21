@@ -1,4 +1,4 @@
 /kuber
 /rabbit
-/rest_to_broker/obj
+/rest_to_broker/obj/*
 /rest_to_broker/bin
