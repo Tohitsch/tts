@@ -1,0 +1,7 @@
+FROM tohitsch/torch
+WORKDIR /pyapp
+COPY . /pyapp/
+ENV HOST=tts-lb-rabbit
+#ENV HOST=tts_rabbit
+RUN pip install -r req.txt
+ENTRYPOINT [ "python3", "tts_start.py" ]

@@ -1,0 +1,38 @@
+version: "3"
+services:
+    tts:
+        build: tts/
+        environment:
+            - HOST=tts_rabbit
+        depends_on:
+            - rabbit
+        container_name: tts_tts
+        networks:
+            - tts
+
+    rabbit:
+        image: rabbitmq:3.11-management
+        ports:
+            - 15672:15672
+            - 5672:5672
+        container_name: tts_rabbit
+        networks:
+            - tts
+  
+
+    rest:
+        build: rest_to_broker
+        
+        environment:
+            - ASPNETCORE_URLS=http://+:5072
+            - HOST=tts_rabbit 
+        networks:
+            - tts
+        ports:
+            - 5073:5072
+        depends_on:
+            - rabbit
+
+networks:
+    tts:
+        driver: bridge

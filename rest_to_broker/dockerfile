@@ -1,0 +1,7 @@
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app/
+COPY . .
+WORKDIR /app/rest/net6.0/
+ENV HOST=tts-lb-rabbit ASPNETCORE_ENVIRONMENT=Development ASPNETCORE_URLS=http://+:5072
+EXPOSE 5072
+ENTRYPOINT [ "dotnet", "TTS_RestToBroker.dll" ]
